@@ -1,0 +1,36 @@
+{
+    "name": "prometheus",
+    "authors": [
+        "Andrew Benton"
+    ],
+    "description": "Prometheus collectors and metrics",
+    "copyright": "Copyright © 2018, Andrew Benton",
+    "license": "MPL-2",
+    "subPackages": [
+        {
+            "name": "vibe",
+            "targetType": "library",
+            "sourcePaths": ["vibe"],
+            "importPaths": ["vibe"],
+            "dependencies": {
+                "prometheus": "*",
+                "vibe-d": "~>0.8.3"
+            }
+        }
+    ],
+    "configurations": [
+        {
+            "name": "library"
+        },
+        {
+            "name": "unittest",
+            "dependencies": {
+                "fluent-asserts": "~>0.11.4",
+                "vibe-d:tls": "*"
+            },
+            "subConfigurations": {
+                "vibe-d:tls": "openssl-1.1"
+            }
+        }
+    ]
+}
