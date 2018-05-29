@@ -36,6 +36,8 @@ class TextEncoding
         import std.math : isInfinity, isNaN, sgn;
         import std.string : strip, stripRight;
 
+        if(value == 0)
+            return "0";
         if(value.isNaN)
             return "Nan";
         if(value.isInfinity)
@@ -47,6 +49,7 @@ class TextEncoding
     unittest
     {
         //usual cases
+        encodeNumber(0.0).should.equal("0");
         encodeNumber(1.0).should.equal("1");
         encodeNumber(1.1).should.equal("1.1");
         encodeNumber(-1.1).should.equal("-1.1");
@@ -94,5 +97,12 @@ class TextEncoding
             encodeNumber(value),
             timestamp
         );
+    }
+
+    unittest
+    {
+        encodeMetricLine("test", [], [], 0.0, 0).should.equal("test 0 0\n");
+        encodeMetricLine("test", [], [], 1.0, 0).should.equal("test 1 0\n");
+        encodeMetricLine("test", ["a"], ["b"], 0.0, 0).should.equal("test{a=\"b\"} 0 0\n");
     }
 }

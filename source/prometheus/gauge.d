@@ -60,6 +60,24 @@ class Gauge : Metric
     }
 }
 
+unittest
+{
+    auto g = new Gauge("test", "testing", null);
+    g.values[(string[]).init.idup].should.equal(0);
+
+    g.inc;
+    g.values[(string[]).init.idup].should.equal(1);
+
+    g.set(35);
+    g.values[(string[]).init.idup].should.equal(35);
+
+    g.observe(2, null);
+    g.values[(string[]).init.idup].should.equal(37);
+
+    g.set(0);
+    g.values[(string[]).init.idup].should.equal(0);
+}
+
 private class GaugeSnapshot : MetricSnapshot
 {
     import prometheus.encoding;
