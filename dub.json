@@ -5,7 +5,7 @@
     ],
     "description": "Prometheus collectors and metrics",
     "copyright": "Copyright © 2018, Andrew Benton",
-    "license": "MPL-2",
+    "license": "MPL-2.0",
     "subPackages": [
         {
             "name": "vibe",

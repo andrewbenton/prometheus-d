@@ -13,7 +13,7 @@ import vibe.http.server;
 
 void delegate(HTTPServerRequest, HTTPServerResponse) handleMetrics(Registry reg)
 {
-    return (HTTPServerRequest req, HTTPServerResponse res) {
+    return (HTTPServerRequest, HTTPServerResponse res) {
         ubyte[] data = new ubyte[0];
 
         foreach(m; reg.metrics)
@@ -22,6 +22,6 @@ void delegate(HTTPServerRequest, HTTPServerResponse) handleMetrics(Registry reg)
             data ~= "\n";
         }
 
-        res.writeBody(data);
+        res.writeBody(data, "text/plain");
     };
 }
