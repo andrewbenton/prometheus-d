@@ -14,6 +14,7 @@ import vibe.http.server;
 void delegate(HTTPServerRequest, HTTPServerResponse) handleMetrics(Registry reg)
 {
     return (HTTPServerRequest req, HTTPServerResponse res) {
+        res.contentType("text/plain");
         ubyte[] data = new ubyte[0];
 
         foreach(m; reg.metrics)
