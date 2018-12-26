@@ -13,6 +13,8 @@ import std.exception : enforce;
 version(unittest)
     import fluent.asserts;
 
+@safe:
+
 class Counter : Metric
 {
     private double[string[]] values;
@@ -82,7 +84,7 @@ private class CounterSnapshot : MetricSnapshot
         this.timestamp = Metric.posixTime;
     }
 
-    override ubyte[] encode(EncodingFormat fmt = EncodingFormat.text)
+    override immutable(ubyte[])  encode(EncodingFormat fmt = EncodingFormat.text)
     {
         enforce(fmt == EncodingFormat.text, "Unsupported encoding type");
 
@@ -104,7 +106,7 @@ private class CounterSnapshot : MetricSnapshot
                 value,
                 this.timestamp);
 
-        return cast(ubyte[])output.data;
+        return cast(immutable ubyte[])output.data;
     }
 }
 
@@ -132,7 +134,7 @@ unittest
 
     MetricSnapshot shot = c.collect;
 
-    ubyte[] data = shot.encode(EncodingFormat.text);
+    immutable ubyte[] data = shot.encode(EncodingFormat.text);
 
     `\\\`.writeln;
     (cast(string)data).writeln;
@@ -151,7 +153,7 @@ unittest
 
     MetricSnapshot shot = c.collect;
 
-    ubyte[] data = shot.encode(EncodingFormat.text);
+    immutable ubyte[] data = shot.encode(EncodingFormat.text);
 
     `\\\`.writeln;
     (cast(string)data).writeln;

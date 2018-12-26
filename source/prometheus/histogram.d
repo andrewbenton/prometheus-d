@@ -11,6 +11,8 @@ import prometheus.metric;
 version(unittest)
     import fluent.asserts;
 
+@safe:
+
 class Histogram : Metric
 {
     private double[] bucketValues;
@@ -185,7 +187,7 @@ private class HistogramSnapshot : MetricSnapshot
         this.timestamp = Metric.posixTime;
     }
 
-    override ubyte[] encode(EncodingFormat fmt = EncodingFormat.text)
+    override immutable(ubyte[]) encode(EncodingFormat fmt = EncodingFormat.text)
     {
         import std.exception : enforce;
         import std.string : empty;
@@ -200,7 +202,7 @@ private class HistogramSnapshot : MetricSnapshot
         foreach(labelValues, value; this.buckets)
             this.writeBucket(output, labelValues, value);
 
-        return cast(ubyte[])output.data;
+        return cast(immutable ubyte[])output.data;
     }
 
     private void writeBucket(ref Appender!string output, const ref string[] labelValues, const ref HistogramBucket bucket)

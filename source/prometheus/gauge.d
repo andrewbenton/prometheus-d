@@ -7,6 +7,8 @@ import std.exception : enforce;
 version(unittest)
     import fluent.asserts;
 
+@safe:
+
 class Gauge : Metric
 {
     private double[string[]] values;
@@ -99,7 +101,7 @@ private class GaugeSnapshot : MetricSnapshot
         this.timestamp = Metric.posixTime;
     }
 
-    override ubyte[] encode(EncodingFormat fmt = EncodingFormat.text)
+    override immutable(ubyte[]) encode(EncodingFormat fmt = EncodingFormat.text)
     {
         enforce(fmt == EncodingFormat.text, "Unsupported encoding type");
 
@@ -122,6 +124,6 @@ private class GaugeSnapshot : MetricSnapshot
                 value,
                 this.timestamp);
 
-        return cast(ubyte[])output.data;
+        return cast(immutable ubyte[])output.data;
     }
 }

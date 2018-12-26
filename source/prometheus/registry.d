@@ -2,16 +2,18 @@ module prometheus.registry;
 
 import prometheus.metric;
 
+@safe:
+
 class Registry
 {
     private __gshared Registry instance;
 
-    shared static this()
+    shared static this() @system
     {
         Registry.instance = new Registry;
     }
 
-    static Registry global() { return Registry.instance; }
+    static Registry global() @system { return Registry.instance; }
 
     private Metric[Metric] _metrics;
 
@@ -37,6 +39,7 @@ class Registry
 
     @property Metric[] metrics()
     {
-        return this._metrics.values;
+        import std.array : array;
+        return this._metrics.byValue.array;
     }
 }
