@@ -3,7 +3,7 @@ module prometheus.encoding;
 import std.format : format;
 import std.functional : pipe;
 
-version(unittest)
+version(PrometheusUnittest)
     import fluent.asserts;
 
 class TextEncoding

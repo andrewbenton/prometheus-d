@@ -4,7 +4,7 @@ import prometheus.metric;
 
 import std.exception : enforce;
 
-version(unittest)
+version(PrometheusUnittest)
     import fluent.asserts;
 
 class Gauge : Metric
