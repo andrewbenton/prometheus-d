@@ -8,6 +8,8 @@ module prometheus.metric;
 
 import prometheus.registry;
 
+@safe:
+
 abstract class Metric
 {
     string name;
@@ -18,7 +20,7 @@ abstract class Metric
 
     MetricSnapshot collect();
 
-    Metric register()
+    Metric register() @system
     {
         return this.register(Registry.global);
     }
@@ -52,7 +54,7 @@ enum EncodingFormat
 
 abstract class MetricSnapshot
 {
-    ubyte[] encode(EncodingFormat fmt = EncodingFormat.text);
+    immutable(ubyte[]) encode(EncodingFormat fmt = EncodingFormat.text);
 }
 
 class EncodeTextUtils

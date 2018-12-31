@@ -6,6 +6,8 @@ import std.functional : pipe;
 version(unittest)
     import fluent.asserts;
 
+@safe:
+
 class TextEncoding
 {
     import std.string : replace;
