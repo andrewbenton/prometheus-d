@@ -7,6 +7,7 @@ Example
 -------
 
 This is an example using [Vibe.d][vibe] to export the number of page hits.
+To import prometheus.vibe put "prometheus:vibe": into the dub.json dependencies.
 
 ```d
 import prometheus.counter;
