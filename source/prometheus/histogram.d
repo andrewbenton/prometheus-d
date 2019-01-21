@@ -64,6 +64,7 @@ unittest
     h.observe( 6).should.not.throwAnyException;
 
     h.collect.encode.should.not.throwAnyException;
+    (cast(HistogramSnapshot)h.collect).sum.should.equal(20);
 }
 
 //test lifecycle w/ labels
@@ -173,6 +174,7 @@ private class HistogramSnapshot : MetricSnapshot
     double[] bucketValues;
     HistogramBucket[string[]] buckets;
     long timestamp;
+    double sum = 0.0;
 
     this(Histogram h)
     {
@@ -181,8 +183,11 @@ private class HistogramSnapshot : MetricSnapshot
         this.labels = h.labels;
         this.bucketValues = h.bucketValues;
 
-        foreach(k, v; h.buckets)
+        foreach(k, v; h.buckets) 
+        {
             this.buckets[k] = v.dup;
+            this.sum += v.sum;
+        }
 
         this.timestamp = Metric.posixTime;
     }
@@ -221,7 +226,7 @@ private class HistogramSnapshot : MetricSnapshot
             this.name ~ "_sum",
             this.labels,
             labelValues,
-            bucket.sum,
+            this.sum,
             this.timestamp);
 
         output ~= TextEncoding.encodeMetricLine(
