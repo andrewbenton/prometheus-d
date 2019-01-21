@@ -4,8 +4,12 @@
         "Andrew Benton"
     ],
     "dependencies": {
-        "prometheus": "~>0.1.0",
-        "prometheus:vibe": "~>0.1.0",
+        "prometheus": {
+            "path": "../../"
+        },
+        "prometheus:vibe": {
+            "path": "../../"
+        },
         "vibe-d": "~>0.8.3",
         "vibe-d:tls": "*"
     },
