@@ -8,7 +8,7 @@ import vibe.d;
 void main()
 {
     auto settings = new HTTPServerSettings;
-    settings.port = 10000;
+    settings.port = 8080;
 
     //create counter and register with global registry
     Counter c = new Counter("hit_count", "Shows the number of site hits", null);
@@ -42,7 +42,7 @@ void main()
         c.inc;
     });
     router.get("/", (HTTPServerRequest req, HTTPServerResponse res) {
-        res.writeBody(cast(ubyte[])"hello, world!");
+        res.writeBody(cast(ubyte[])"hello, world!", "text/plain");
     });
     router.get("/metrics", handleMetrics(Registry.global));
 
