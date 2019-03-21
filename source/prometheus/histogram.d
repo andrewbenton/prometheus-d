@@ -111,7 +111,7 @@ struct HistogramBucket
     HistogramBucket dup()
     {
         auto ret = HistogramBucket(this.parent);
-        ret.sum = 0;
+        ret.sum = this.sum;
         ret.values = this.values.dup;
         return ret;
     }
