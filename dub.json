@@ -28,6 +28,7 @@
                 "fluent-asserts": "~>0.12.4",
                 "vibe-d:tls": "*"
             },
+            "versions": ["PrometheusUnittest"],
             "subConfigurations": {
                 "vibe-d:tls": "openssl-1.1"
             }

@@ -8,7 +8,7 @@ module prometheus.histogram;
 
 import prometheus.metric;
 
-version(unittest)
+version(PrometheusUnittest)
     import fluent.asserts;
 
 @safe:

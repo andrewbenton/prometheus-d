@@ -10,7 +10,7 @@ import prometheus.metric;
 
 import std.exception : enforce;
 
-version(unittest)
+version(PrometheusUnittest)
     import fluent.asserts;
 
 @safe:
