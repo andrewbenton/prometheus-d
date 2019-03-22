@@ -8,6 +8,7 @@ vibe.dll
 vibe.a
 vibe.lib
 vibe-test-*
+vibe
 *.exe
 *.o
 *.obj
